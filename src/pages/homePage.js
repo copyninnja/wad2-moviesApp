@@ -5,6 +5,9 @@ import React, {useState, useEffect } from "react";
 
 
 const MovieListPage = () => {
+  const [titleFilter, setTitleFilter] = useState("");       // NEW
+  const [genreFilter, setGenreFilter] = useState("0");      // NEW
+  
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     fetch(
@@ -12,18 +15,32 @@ const MovieListPage = () => {
       .then(res => res.json())
       .then(json => {
         console.log(json)
-        console.log(process.env.REACT_APP_TMDB_KEY)
         return json.results
       })
       .then(movies => {
         setMovies(movies);
       });
-  }, []);
+  }, []);  
+  // NEW BLOCK START
+  const genre = Number(genreFilter)
+  let displayedMovies = movies
+    .filter(m => {
+      return m.title.toLowerCase().search(titleFilter.toLowerCase()) !== -1;
+    })
+    .filter(m => {
+      return genre > 0 ? m.genre_ids.includes(Number(genreFilter)) : true;
+    });
+
+  const handleFilterChange = (type, value) => {
+    if (type === "name") setTitleFilter(value);
+    else setGenreFilter(value);
+  };
+  // NEW BLOCK END
   return (
     <>
-      <Header numMovies={movies.length} />
-      <FilterControls />
-      <MovieList movies={movies} />
+      <Header numMovies={displayedMovies.length} />          {/* CHANGED */}
+      <FilterControls onUserInput={handleFilterChange} />    {/* CHANGED */}
+      <MovieList movies={displayedMovies} />                  {/* CHANGED */}
     </>
   );
 };

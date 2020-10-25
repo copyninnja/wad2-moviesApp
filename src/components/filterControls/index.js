@@ -15,11 +15,10 @@ const FilterControls = props => {
         setGenres([genres[0], ...apiGenres]);
       });
   }, []);
-
   const handleChange = (e, type, value) => {
     e.preventDefault()
-    // Completed in a later lab
-  };
+    props.onUserInput(type, value)   // NEW
+  }
   const handleTextChange = e => {
     handleChange(e, "name", e.target.value)
   }
