@@ -26,7 +26,7 @@ describe("Home Page ", () => {
 
     describe("Base test", () => {
         it("displays page header", () => {
-            cy.get("h2").contains("No. Movies");
+            cy.get("h2").contains("Discover Movies");
             cy.get(".badge").contains(20);
         });
     })
@@ -59,12 +59,8 @@ describe("Home Page ", () => {
                 const searchString = "xyz";
                 const matchingMovies = filterByTitle(movies, searchString);
                 cy.get("input").clear().type(searchString);
-                cy.get(".card").should("have.length", matchingMovies.length);
-                cy.get(".card").each(($card, index) => {
-                    cy.wrap($card)
-                        .find(".card-title")
-                        .should("have.text", matchingMovies[index].title);
-                })
+                cy.get(".movies").children().should("have.length", matchingMovies.length);
+           
             })
         })
         describe("By movie genre", () => {
