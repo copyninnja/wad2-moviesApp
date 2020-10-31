@@ -77,6 +77,22 @@ describe("Home Page ", () => {
                   .should("have.text", matchingMovies[index].title);
               });      
             });
+            it("should display movies with the specified genre and text", () => {
+                const searchString = "p";
+                const selectedGenreId = 35;
+                const selectedGenreText = "Comedy";
+                const matchingMovies = filterByTitle( filterByGenre(movies, selectedGenreId),searchString);
+                console.log(matchingMovies);
+                cy.get("select").select(selectedGenreText); 
+                cy.get("input").clear().type(searchString);
+                cy.get(".card").should("have.length", matchingMovies.length);
+                cy.get(".card").each(($card, index) => {
+                  cy.wrap($card)
+                    .find(".card-title")
+                    .should("have.text", matchingMovies[index].title);
+                });      
+              });
+
         });
       
       });
