@@ -59,12 +59,24 @@ describe("Home Page ", () => {
                 const searchString = "xyz";
                 const matchingMovies = filterByTitle(movies, searchString);
                 cy.get("input").clear().type(searchString);
-                cy.get(".movies").children().should("have.length", matchingMovies.length);
+                cy.get(".movies").children().should("have.length", 0);
            
             })
-        })
-        describe("By movie genre", () => {
-            // More later
-        })
+        }) 
     })
-})
+        describe("By movie genre", () => {
+            it("should display movies with the specified genre only", () => {
+              const selectedGenreId = 35;
+              const selectedGenreText = "Comedy";
+              const matchingMovies = filterByGenre(movies, selectedGenreId);
+              cy.get("select").select(selectedGenreText); 
+              cy.get(".card").should("have.length", matchingMovies.length);
+              cy.get(".card").each(($card, index) => {
+                cy.wrap($card)
+                  .find(".card-title")
+                  .should("have.text", matchingMovies[index].title);
+              });      
+            });
+        });
+      
+      });

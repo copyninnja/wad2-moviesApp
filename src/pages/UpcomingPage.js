@@ -15,9 +15,8 @@ const UpcomingPage = () => {
           title='Upcoming Movies'
           movies={movies}
           buttonHandler={toDo}
-        />
-       
+        />      
+
     );
-    document.getElementById("h2").innerHTML("Upcoming Movies");
   };
   export default UpcomingPage;
