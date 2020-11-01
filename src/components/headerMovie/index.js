@@ -1,17 +1,18 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../globals/fontawesome";
-import creatHistory from 'history/createBrowserHistory' 
-const MovieHeader = ({ movie }) => {
-  const history = creatHistory();
-
+import creatHistory from 'history/createBrowserHistory' ;
+import { withRouter } from "react-router-dom";
+const MovieHeader = ({ movie, history }) => {
   return (
-    <div className="row">  
-    <button onClick={() => history.goBack()} >Back
-            <FontAwesomeIcon  icon={"arrow-circle-left"} size="1x" />
-            </button>
+    <div className="row">
+             <div className="col-2">
+          <button onClick={() => history.goBack()}>
+            <FontAwesomeIcon icon={["fas", "arrow-circle-left"]} size="2x" />
+            <span>{" Back"}</span>
+          </button>
+        </div>
       <div className="col-6 offset-3">
-    
         <h2>
           {movie.title}
           {"  "}
@@ -24,4 +25,4 @@ const MovieHeader = ({ movie }) => {
   );
 };
 
-export default MovieHeader;
+export default withRouter( MovieHeader );
