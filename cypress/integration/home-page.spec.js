@@ -77,7 +77,7 @@ describe("Home Page ", () => {
                   .should("have.text", matchingMovies[index].title);
               });      
             });
-            it("should display movies with the specified genre and text", () => {
+            it("should display movies with the specified genre and title", () => {
                 const searchString = "p";
                 const selectedGenreId = 35;
                 const selectedGenreText = "Comedy";
