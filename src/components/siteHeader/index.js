@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../globals/fontawesome";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "./siteHeader.css";
-
+import HeaderUser from '../HeaderUser';
 const SiteHeader = () => {
   return (
     <nav className="navbar  navbar-light fixed-top  bg-dark ">
@@ -42,8 +42,10 @@ const SiteHeader = () => {
               Favorites
             </Link>
           </li>
-        </ul>
+           <HeaderUser/>
+       </ul>
       </nav>
+
     </nav>
   );
 };
