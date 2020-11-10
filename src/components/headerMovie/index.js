@@ -1,7 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../globals/fontawesome";
-import creatHistory from 'history/createBrowserHistory' ;
 import { withRouter } from "react-router-dom";
 const MovieHeader = ({ movie, history }) => {
   return (
