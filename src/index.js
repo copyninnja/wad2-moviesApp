@@ -10,15 +10,20 @@ import SiteHeader from './components/siteHeader'
 import UpcomingPage from"./pages/UpcomingPage";
 import MoviesContextProvider from "./contexts/moviesContext";
 import GenresContextProvider from "./contexts/genresContext";
+import AuthContextProvider from "./contexts/authContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import loginPage from './pages/loginPage';
+import register from './pages/RegisterPage';
+
 
 const App = () => {
   return (
+
       <BrowserRouter>
         <div className="jumbotron">
           <SiteHeader />      {/* New Header  */}
           <div className="container-fluid">
+          <AuthContextProvider>
           <MoviesContextProvider>     {/* NEW  */}
           <GenresContextProvider>    {/* NEW */}
             <Switch>
@@ -28,14 +33,18 @@ const App = () => {
           <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
           <Route path="/movies/:id" component={MoviePage} />
           <Route path="/login" component={loginPage} />
+          <Route path="/register" component={register} />
+
           <Route path="/" component={HomePage} />
           <Redirect from="*" to="/" />
         </Switch>
         </GenresContextProvider>    {/* NEW */}
         </MoviesContextProvider>     {/* NEW */}
+        </AuthContextProvider>
       </div>
     </div>
   </BrowserRouter>
+
   );
 };
 

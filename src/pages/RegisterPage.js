@@ -1,29 +1,22 @@
-import React ,{useContext}  from "react";
-import {AuthContext} from '../contexts/authContext';
+import React  from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import  useForm from 'react-hook-form';
 import config from '../firebaseConfig';
-import firebase from "firebase/app";
-import "firebase/auth";
+import Link from '@material-ui/core/Link';
 
+import firebase from "firebase/app";
+
+import "firebase/auth";
 import {
   FirebaseAuthProvider,
-  IfFirebaseUnAuthed,
-  IfFirebaseAuthed,
-  FirebaseAuthConsumer,
-  IfFirebaseAuthedAnd
+
 } from "@react-firebase/auth";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -44,27 +37,25 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3, 0, 2),
     },
   }));
+
+
   
-  export default function SignIn() {
+  export default function Register() {
     const classes = useStyles();
     const {register,handleSubmit}= useForm();
-    const context = useContext(AuthContext);
-
     
-    const signin= props =>{
-
-      firebase.auth().signInWithEmailAndPassword(props.email,props.password).catch(function(error) {
+    const regis= props =>{
+      firebase.auth().createUserWithEmailAndPassword(props.email, props.password).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
       // [START_EXCLUDE]
-      if (errorCode === 'auth/wrong-password') {
-        alert('Wrong password.');
+      if (errorCode == 'auth/weak-password') {
+        alert('The password is too weak.');
       } else {
         alert(errorMessage);
       }
       console.log(error);
-
       // [END_EXCLUDE]
     });
   }
@@ -76,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
           <Avatar className={classes.avatar}>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            register
           </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit((data)=>signin(data))}>
+          <form className={classes.form} noValidate onSubmit={handleSubmit((data)=>regis(data))}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -103,20 +94,8 @@ const useStyles = makeStyles((theme) => ({
               id="password"
               autoComplete="current-password"
             />
-            <IfFirebaseAuthed>
-            {(user) =>context.authenticate(user.email, user.password)}
-            <Redirect
-      to={{
-        pathname: "/"
-      }}
-    />
-            </IfFirebaseAuthed>
-            <FormControlLabel
-              control={
-                // <Controller as={Checkbox} contro={control} name="remember" color="primary" defaultValue={false}
-              <Checkbox  name="remember" color="primary" defaultValue={false} />}
-              label="Remember me"
-            />
+           <Link href="./login" >
+                
             <Button
               type="submit"
               fullWidth
@@ -124,20 +103,11 @@ const useStyles = makeStyles((theme) => ({
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              
+              Register
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="./register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            
+            </Link>
           </form>
         </div>
    

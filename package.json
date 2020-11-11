@@ -11,6 +11,8 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@react-firebase/auth": "^0.2.10",
+    "@react-firebase/database": "^0.3.11",
     "bootstrap": "^4.3.1",
     "dotenv": "^8.2.0",
     "firebase": "^8.0.1",
@@ -18,7 +20,8 @@
     "react-dom": "^16.11.0",
     "react-hook-form": "^3.29.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "reactfire": "^2.0.0-alpha.3"
   },
   "scripts": {
     "storybook": "start-storybook -s ./public -p 6006 -c ./.storybook",
