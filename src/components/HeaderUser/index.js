@@ -1,18 +1,20 @@
 import{faUser} from'@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React,{useContext} from "react";
+import { Link } from "react-router-dom";
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { AuthContext } from '../../contexts/authContext';
+import PrivateRoute from '../privateRoute';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 const HeaderUser = () => {
         const [anchorEl, setAnchorEl] = React.useState(null);
-        const [auth, setAuth] = React.useState(true);
+        const context = useContext(AuthContext);
+
         const open = Boolean(anchorEl);
 
-        // const movies = context.upcoming.filter((m) => {  // New
-        //   return !("watchList" in m);
-        // });
         const handleMenu = (event) => {
             setAnchorEl(event.currentTarget);
         };
@@ -20,8 +22,12 @@ const HeaderUser = () => {
         const handleClose = () => {
             setAnchorEl(null);
         };
-        return (
-            auth &&(
+        const handleSignOut = () => {
+            context.signout();
+        };
+
+        // return console.log(context.isAuthenticated === true);
+        return !context.isAuthenticated ?(
                 <div>
                 <FontAwesomeIcon
                 className="navbar-text text-light"
@@ -44,12 +50,41 @@ const HeaderUser = () => {
                 open={open}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+            <Link to="/login">
+                <MenuItem >SignIn</MenuItem> </Link>             
+   {/* <MenuItem onClick={handleClose}>Register</MenuItem> */}
                         </Menu>
             </div>
     )
-    )
+    
+    : (
+        <div>
+                <FontAwesomeIcon
+                className="navbar-text text-light"
+                icon={faUser}
+                size="3x"
+                onClick={handleMenu}
+            />     
+            <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+            >   
+                <MenuItem onClick={handleSignOut}>signOut</MenuItem>
+                        </Menu>
+            </div>
+      );
+        
 
 };
 

@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import { Link } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
       // [END_EXCLUDE]
     });
   }
-    return (
+    return  !context.isAuthenticated ? (
 <FirebaseAuthProvider {...config} firebase={firebase}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -104,13 +104,8 @@ const useStyles = makeStyles((theme) => ({
               autoComplete="current-password"
             />
             <IfFirebaseAuthed>
-            {(user) =>context.authenticate(user.email, user.password)}
-            <Redirect
-      to={{
-        pathname: "/"
-      }}
-    />
-            </IfFirebaseAuthed>
+            {(user) =>context.authenticate(user.email, user.password)}  
+             </IfFirebaseAuthed>
             <FormControlLabel
               control={
                 // <Controller as={Checkbox} contro={control} name="remember" color="primary" defaultValue={false}
@@ -143,6 +138,12 @@ const useStyles = makeStyles((theme) => ({
    
       </Container>
       </FirebaseAuthProvider>
-    );
+    )
+    :(
+      <Link className=" text-black" to="/">
+        You've already loginin,
+      Back to HomePage
+    </Link>         
+    )
   }
 

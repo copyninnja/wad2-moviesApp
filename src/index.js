@@ -21,9 +21,9 @@ const App = () => {
 
       <BrowserRouter>
         <div className="jumbotron">
+        <AuthContextProvider>
           <SiteHeader />      {/* New Header  */}
           <div className="container-fluid">
-          <AuthContextProvider>
           <MoviesContextProvider>     {/* NEW  */}
           <GenresContextProvider>    {/* NEW */}
             <Switch>
@@ -34,14 +34,15 @@ const App = () => {
           <Route path="/movies/:id" component={MoviePage} />
           <Route path="/login" component={loginPage} />
           <Route path="/register" component={register} />
-
+          {/* <PrivateRoute path="/" component={} /> */}
           <Route path="/" component={HomePage} />
           <Redirect from="*" to="/" />
         </Switch>
         </GenresContextProvider>    {/* NEW */}
         </MoviesContextProvider>     {/* NEW */}
-        </AuthContextProvider>
-      </div>
+       
+      </div> 
+      </AuthContextProvider>
     </div>
   </BrowserRouter>
 

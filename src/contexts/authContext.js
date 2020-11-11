@@ -1,5 +1,6 @@
 import React, { useState, createContext } from "react";
-
+import firebase from "firebase/app";
+import "firebase/auth";
 export const AuthContext = createContext(null);
 
 const AuthContextProvider = (props) => {
@@ -13,7 +14,8 @@ const AuthContextProvider = (props) => {
   };
 
   const signout = () => {
-    setTimeout(() => setIsAuthenticated(false), 100);
+    setTimeout(() => setIsAuthenticated(false), 1);
+    firebase.auth().signOut();
   }
 
   return (
