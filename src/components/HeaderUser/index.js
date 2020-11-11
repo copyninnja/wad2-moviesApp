@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { AuthContext } from '../../contexts/authContext';
-import PrivateRoute from '../privateRoute';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 const HeaderUser = () => {
         const [anchorEl, setAnchorEl] = React.useState(null);

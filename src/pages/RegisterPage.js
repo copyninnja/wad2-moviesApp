@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
       var errorCode = error.code;
       var errorMessage = error.message;
       // [START_EXCLUDE]
-      if (errorCode == 'auth/weak-password') {
+      if (errorCode === 'auth/weak-password') {
         alert('The password is too weak.');
       } else {
         alert(errorMessage);

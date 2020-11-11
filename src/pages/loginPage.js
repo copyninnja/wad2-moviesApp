@@ -18,12 +18,9 @@ import "firebase/auth";
 
 import {
   FirebaseAuthProvider,
-  IfFirebaseUnAuthed,
   IfFirebaseAuthed,
-  FirebaseAuthConsumer,
-  IfFirebaseAuthedAnd
+
 } from "@react-firebase/auth";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
