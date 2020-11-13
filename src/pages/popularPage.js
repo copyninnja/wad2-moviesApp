@@ -8,7 +8,6 @@ const PopularPage = () => {
   const movies = context.popular.filter((m) => {  // New
     return !("popular" in m);
   });
-    console.log("movies");
     return (
         <PageTemplate
           title='Popular Movies'
