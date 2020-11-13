@@ -14,14 +14,15 @@ import AuthContextProvider from "./contexts/authContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import loginPage from './pages/loginPage';
 import register from './pages/RegisterPage';
-
+import PopularPage from './pages/popularPage';
+import PrivateRoute from './components/privateRoute';
 
 const App = () => {
   return (
 
       <BrowserRouter>
+         <AuthContextProvider>
         <div className="jumbotron">
-        <AuthContextProvider>
           <SiteHeader />      {/* New Header  */}
           <div className="container-fluid">
           <MoviesContextProvider>     {/* NEW  */}
@@ -31,19 +32,18 @@ const App = () => {
           <Route path="/reviews/:id" component={MovieReviewPage} />
           <Route exact path="/movies/Upcoming" component={UpcomingPage} />
           <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
+          <PrivateRoute exact path="/movies/popular" component={PopularPage} />
           <Route path="/movies/:id" component={MoviePage} />
-          <Route path="/login" component={loginPage} />
-          <Route path="/register" component={register} />
-          {/* <PrivateRoute path="/" component={} /> */}
+          <Route exact path="/login" component={loginPage} />
+          <Route exact path="/register" component={register} />
           <Route path="/" component={HomePage} />
           <Redirect from="*" to="/" />
         </Switch>
         </GenresContextProvider>    {/* NEW */}
         </MoviesContextProvider>     {/* NEW */}
-       
       </div> 
-      </AuthContextProvider>
-    </div>
+    </div> 
+    </AuthContextProvider>
   </BrowserRouter>
 
   );
