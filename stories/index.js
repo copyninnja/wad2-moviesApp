@@ -11,7 +11,7 @@ import AddFavoriteButton from "../src/components/buttons/addToFavorites";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
-import Carousel from "../src/components/Carousel";
+import Karousel from "../src/components/Carousel";
 import Rank from "../src/components/rate";
 
 const sample = {
@@ -156,7 +156,20 @@ storiesOf("Movie Details Page/MovieHeader", module)
   .add("default", () => <MovieHeader movie={sample} />);
 
   storiesOf("Movie Details Page/carousel", module)
-  .add("default", () => <Carousel />);
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    const movies = [sample, sample, sample, sample, sample];
+    return (
+  <Karousel 
+  movies={movies}
+  action={movie => (
+    <button className="btn w-100 btn-primary">Test</button>
+  )}
+  />
+    )
+  });
 
   storiesOf("Movie Details Page/rank", module)
   .add("default", () => <Rank />);

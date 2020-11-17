@@ -1,37 +1,35 @@
-import {    Carousel} from 'antd';
-import 'antd/dist/antd.css';
+
 import React from "react";
+import CarouselCard from "../CarouselCard"
+import {Carousel} from 'antd';
+import 'antd/dist/antd.css';
 
+const Karousel =({movies,session_id}) => {
+  const movieCards = movies.map(m => (
+    <CarouselCard key={m.id} movie={m} session_id={session_id}/>));
 
-const carousel = () => {
         const contentStyle = {
-            height: '160px',
+            height: '580px',
             color: '#fff',
             lineHeight: '160px',
             textAlign: 'center',
             background: '#364d79',
+
         };
-        console.log("happy");
+
+
 return( 
+  <div style={contentStyle}>
+  <Carousel autoplay>
+   {movieCards}
     <div>
-    <Carousel autoplay>
-    <div>
-      <h3 style={contentStyle}>1</h3>
+      <h2 style={contentStyle}></h2>
     </div>
-    <div>
-      <h3 style={contentStyle}>2</h3>
-    </div>
-    <div>
-      <h3 style={contentStyle}>3</h3>
-    </div>
-    <div>
-      <h3 style={contentStyle}>4</h3>
-    </div>
-  </Carousel>
-  </div>
 
+    </Carousel>
 
+</div>
 );
 
 }
-export default carousel;
+export default Karousel;

@@ -1,6 +1,6 @@
 import React, {useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
-import {MoviesContext} from '../contexts/moviesContext'
+import {MoviesContext} from '../contexts/moviesContext';
 import  AddToLike from '../components/buttons/addToLike'
 
 const PopularPage = () => {

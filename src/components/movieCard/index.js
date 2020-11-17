@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./movieCard.css";
 import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 const MovieCard = ({movie, action}) => {
 
   return (
@@ -30,6 +29,9 @@ const MovieCard = ({movie, action}) => {
             <FontAwesomeIcon icon={["fas", "star"]} />
             <span> {movie.vote_average}</span>
           </p>
+          {/* <p>           
+          <Rate/>
+          </p> */}
         </div>
         <div className="card-footer">
            {action(movie)}

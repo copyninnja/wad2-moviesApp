@@ -16,6 +16,7 @@ import loginPage from './pages/loginPage';
 import register from './pages/RegisterPage';
 import PopularPage from './pages/popularPage';
 import PrivateRoute from './components/privateRoute';
+import TopRatePage from './pages/TopRatePage';
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
           <Route exact path="/movies/Upcoming" component={UpcomingPage} />
           <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
           <PrivateRoute exact path="/movies/popular" component={PopularPage} />
+          <PrivateRoute exact path="/movies/TopRate" component={TopRatePage}/>
           <Route path="/movies/:id" component={MoviePage} />
           <Route exact path="/login" component={loginPage} />
           <Route exact path="/register" component={register} />
