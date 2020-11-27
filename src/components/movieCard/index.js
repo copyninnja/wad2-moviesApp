@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const MovieCard = ({movie, action}) => {
 
   return (
-    <div className="col-sm-3">
+    <div className="col-sm-3" data-cy={`${movie.id}`}>
       <div className="card  bg-white">
       <Link to={`/movies/${movie.id}`}>
         <img

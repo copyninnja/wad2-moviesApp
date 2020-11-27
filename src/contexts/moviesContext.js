@@ -30,13 +30,13 @@ const reducer = (state, action) => {
           upcoming: [...state.upcoming]
         };
     case "load":
-      return { movies: action.payload.movies, upcoming: [...state.upcoming],popular: [...state.popular],TopRate: [...state.TopRate]};
+      return { movies: action.payload.movies, upcoming: [...state.upcoming],popular: [...state.popular],toprate: [...state.toprate]};
     case "load-upcoming":
-      return { upcoming: action.payload.movies, movies: [...state.movies],popular: [...state.popular] ,TopRate: [...state.TopRate]};
+      return { upcoming: action.payload.movies, movies: [...state.movies],popular: [...state.popular] ,toprate: [...state.toprate]};
     case "load-popular":
-      return { popular: action.payload.movies ,upcoming: [...state.upcoming] , movies: [...state.movies] ,TopRate: [...state.TopRate] };
-    case "load-TopRate":
-      return { TopRate: action.payload.movies,popular: [...state.popular] ,upcoming: [...state.upcoming] , movies: [...state.movies]};
+      return { popular: action.payload.movies ,upcoming: [...state.upcoming], movies: [...state.movies] ,toprate: [...state.toprate] };
+    case "load-toprate":
+      return { toprate: action.payload.movies,popular: [...state.popular] ,upcoming: [...state.upcoming] , movies: [...state.movies]};
     case "add-review":
       return {
         movies: state.movies.map((m) =>
@@ -52,7 +52,7 @@ const reducer = (state, action) => {
 };
 
 const MoviesContextProvider = (props) => {
-  const [state, dispatch] = useReducer(reducer, { movies: [], upcoming: [], popular: [],TopRate:[]});
+  const [state, dispatch] = useReducer(reducer, { movies: [], upcoming: [], popular: [],toprate:[]});
 
   const addToFavorites = (movieId) => {
     const index = state.movies.map((m) => m.id).indexOf(movieId);
@@ -94,7 +94,7 @@ const MoviesContextProvider = (props) => {
 
   useEffect(() => {
     getTopRtedMovies().then((movies) => {
-      dispatch({ type: "load-TopRate", payload: { movies } });
+      dispatch({ type: "load-toprate", payload: { movies } });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -109,7 +109,7 @@ const MoviesContextProvider = (props) => {
         movies: state.movies,
         upcoming: state.upcoming,
         popular: state.popular,
-        TopRate:state.TopRate,
+        toprate:state.toprate,
         addToFavorites: addToFavorites,
         addReview: addReview,
         addToWatchList: addToWatchList,

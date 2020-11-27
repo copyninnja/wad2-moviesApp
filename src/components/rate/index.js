@@ -1,14 +1,14 @@
-import React,{ useState ,useEffect}  from "react";
+import React from "react";
 import { Rate } from 'antd';
 import 'antd/dist/antd.css';
 
 const Rank = ({movie,session_id}) => {
     const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
-    const [rank, setRank] = useState("0");
+    let rank=0;
 
-    useEffect(() => {
+    const rankit=(it)=>{
       let data = new FormData();
-      data.append("value",rank*2);
+      data.append("value",it*2);
       // POST request using fetch inside useEffect React hook
       const requestRank = {
           method: 'POST',
@@ -27,11 +27,14 @@ const Rank = ({movie,session_id}) => {
       })
       .catch(error => {
           console.error('There was an error!', error);
-      });
-  }, [rank]);
+      }); 
+       // eslint-disable-next-line
+  }
+
+
 
       const handleChange = (value) => {
-        setRank( value );
+        rankit(value);
       };
 
 return( 

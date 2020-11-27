@@ -23,7 +23,7 @@ return(
   <Carousel autoplay>
    {movieCards}
     <div>
-      <h2 style={contentStyle}></h2>
+      <h2 style={contentStyle}>end</h2>
     </div>
 
     </Carousel>

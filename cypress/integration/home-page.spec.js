@@ -26,7 +26,7 @@ describe("Home Page ", () => {
 
     describe("Base test", () => {
         it("displays page header", () => {
-            cy.get("h2").contains("Discover Movies");
+            cy.get("h2").contains("No. Movies");
             cy.get(".badge").contains(20);
         });
     })
@@ -90,7 +90,9 @@ describe("Home Page ", () => {
                   cy.wrap($card)
                     .find(".card-title")
                     .should("have.text", matchingMovies[index].title);
-                });      
+                }); 
+                cy.wait(1000)
+            cy.percySnapshot();     
               });
 
         });

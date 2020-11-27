@@ -56,9 +56,9 @@ const useStyles = makeStyles((theme) => ({
       var errorMessage = error.message;
       // [START_EXCLUDE]
       if (errorCode === 'auth/wrong-password') {
-        alert('Wrong password.');
+        window.alert('Wrong password.');
       } else {
-        alert(errorMessage);
+        window.alert(errorMessage);
       }
       console.log(error);
 
@@ -75,11 +75,12 @@ const useStyles = makeStyles((theme) => ({
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit((data)=>signin(data))}>
+          <form data-cy="form" className={classes.form} noValidate onSubmit={handleSubmit((data)=>signin(data))}>
             <TextField
               variant="outlined"
               margin="normal"
               inputRef={register}
+              data-cy="emailinput"
               required
               fullWidth
               id="email"
@@ -94,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
               inputRef={register}
               required
               fullWidth
+              data-cy="userpassword"
               name="password"
               label="Password"
               type="password"
@@ -115,6 +117,7 @@ const useStyles = makeStyles((theme) => ({
               variant="contained"
               color="primary"
               className={classes.submit}
+              data-cy="Sign In"
             >
               Sign In
             </Button>

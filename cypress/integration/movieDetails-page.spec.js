@@ -57,5 +57,7 @@ describe("Movie Details Page", () => {
     cy.get(".movie")
       .should("have.attr", "src")
       .should("include", movie.poster_path);
+      cy.wait(1000)
+            cy.percySnapshot();
   });
 });

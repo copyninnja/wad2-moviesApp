@@ -29,7 +29,7 @@ const HeaderUser = () => {
         return !context.isAuthenticated ?(
                 <div>
                 <FontAwesomeIcon
-                className="navbar-text text-light"
+                className="navbar-text text-light head-user"
                 icon={faUser}
                 size="3x"
                 onClick={handleMenu}
@@ -50,7 +50,7 @@ const HeaderUser = () => {
                 onClose={handleClose}
             >
             <Link to="/login">
-                <MenuItem >SignIn</MenuItem> </Link>             
+                <MenuItem  data-cy="SignIn">SignIn</MenuItem> </Link>             
    {/* <MenuItem onClick={handleClose}>Register</MenuItem> */}
                         </Menu>
             </div>
@@ -79,7 +79,7 @@ const HeaderUser = () => {
                 open={open}
                 onClose={handleClose}
             >   
-                <MenuItem onClick={handleSignOut}>signOut</MenuItem>
+                <MenuItem data-cy="SignOut" onClick={handleSignOut}>SignOut</MenuItem>
                         </Menu>
             </div>
       );

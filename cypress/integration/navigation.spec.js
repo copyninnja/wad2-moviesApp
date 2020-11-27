@@ -41,13 +41,26 @@ describe("Navigation", () => {
             cy.get("h2").contains("Favorite Movies");
             cy.get("nav").find("li").eq(0).find("a").click();
             cy.url().should("not.include", `/favorites`);
-            cy.get("h2").contains("Discover Movies");
+            cy.get("h2").contains("No. Movies");
             cy.get("nav").find("li").eq(2).find("a").click();
             cy.get("nav.navbar-brand").find("a").click();
             cy.url().should("not.include", `/favorites`);
-            cy.get("h2").contains("Discover Movies");
+            cy.get("h2").contains("No. Movies");
         });
+        it("from login navigation", () => {
+            cy.get("svg").eq(2).click();
+            if (cy.get("svg").eq(-1).children() == "SignOut") {
+                cy.get('[data-cy="SignOut"]').click();
+                cy.get("svg").eq(2).click();
+                cy.contains("SignIn").click();
+            } else {
+                cy.get('[data-cy="SignIn"]').click();
+            }
+            cy.url().should("include", `/login`);
+        })
     });
+
+
 
     // describe("From the Movie Details page ", () => {
     //     beforeEach(() => {
@@ -86,16 +99,17 @@ describe("Navigation", () => {
             cy.get(".card").eq(1).find("img").click();
             cy.get("svg[data-icon=arrow-circle-left]").click();
             cy.url().should("not.include", `/movies`);
-            cy.get("h2").contains("Discover Movies");
+            cy.get("h2").contains("No. Movies");
         });
-        it.only("should navigate from favorites page to movie details and back", () => {
+        it("should navigate from favorites page to movie details and back", () => {
             cy.visit("/");
             cy.get(".card").eq(0).find("button").click();
             cy.get("nav").find("li").eq(2).find("a").click();
             cy.get(".card").eq(0).find("img").click();
             cy.get("svg[data-icon=arrow-circle-left]").click();
-            cy.url().should("not.include",`${movies[0].id}`);
+            cy.url().should("not.include", `${movies[0].id}`);
             cy.get("h2").contains("Favorite Movies");
         });
     });
+
 });

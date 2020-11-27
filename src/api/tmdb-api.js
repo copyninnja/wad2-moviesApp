@@ -74,8 +74,9 @@ export const getMovies = () => {
   export const postLogin=(request_token)=>{
     let data = new FormData();
     data.append("request_token",request_token);
+    console.log(process.env.REACT_APP_USER_NAME);
     return fetch(
-      `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${process.env.REACT_APP_TMDB_KEY}&username=danielGong&password=Latchup99`,
+      `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${process.env.REACT_APP_TMDB_KEY}&username=${process.env.REACT_APP_USERNAME}&password=${process.env.REACT_APP_PASSWORD}`,
       {
         method: 'POST',
         body: data,
