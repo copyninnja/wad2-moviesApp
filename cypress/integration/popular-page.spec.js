@@ -39,58 +39,8 @@ describe("popular", () => {
           cy.get("nav").find("li").eq(3).find("a").click();
 
       });
-    it("check cards layout", () => {   
-    //   cy.get(".card").each(($card, index) => {
-    //     cy.wrap($card)
-    //         .get(".card-title")
-    //         .should("be.verticallyAligned", "svg","left");
-    // });    
-        cy.get(`[data-cy=${movies[0].id}]`).find("img").should('be.horizontallyAligned', 
-          `[data-cy=${movies[1].id}] img`, "top");
-        cy.get(`[data-cy=${movies[4].id}]`).find("img").should('be.verticallyAligned', 
-          `[data-cy=${movies[0].id}] img`, "left");
 
-        cy.wait(1000)
-        cy.percySnapshot();
-        cy.logout()
-    });
 
 });
-
-
-
-
-    // describe("From the Favorites page", () => {
-    //     beforeEach(() => {
-    //         cy.visit("/");
-    //         cy.get(".card").eq(0).find("button").click();
-    //         cy.get("nav").find("li").eq(2).find("a").click();
-    //     });
-    //     it("should navigate to the movies detail page and change the browser URL", () => {
-    //         cy.get(".card").eq(0).find("img").click();
-    //         cy.url().should("include", `/movies/${movies[0].id}`);
-    //         cy.get("h2").contains(movies[0].title);
-    //     });
-    // });
-    // describe("The Go Back button", () => {
-    //     beforeEach(() => {
-    //         cy.visit("/");
-    //     });
-    //     it("should navigate from home page to movie details and back", () => {
-    //         cy.get(".card").eq(1).find("img").click();
-    //         cy.get("svg[data-icon=arrow-circle-left]").click();
-    //         cy.url().should("not.include", `/movies`);
-    //         cy.get("h2").contains("No. Movies");
-    //     });
-    //     it("should navigate from favorites page to movie details and back", () => {
-    //         cy.visit("/");
-    //         cy.get(".card").eq(0).find("button").click();
-    //         cy.get("nav").find("li").eq(2).find("a").click();
-    //         cy.get(".card").eq(0).find("img").click();
-    //         cy.get("svg[data-icon=arrow-circle-left]").click();
-    //         cy.url().should("not.include", `${movies[0].id}`);
-    //         cy.get("h2").contains("Favorite Movies");
-    //     });
-    // });
 
 });
