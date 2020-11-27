@@ -39,7 +39,21 @@ describe("popular", () => {
           cy.get("nav").find("li").eq(3).find("a").click();
 
       });
+    it("check cards layout", () => {   
+    //   cy.get(".card").each(($card, index) => {
+    //     cy.wrap($card)
+    //         .get(".card-title")
+    //         .should("be.verticallyAligned", "svg","left");
+    // });    
+        cy.get(`[data-cy=${movies[0].id}]`).find("img").should('be.horizontallyAligned', 
+          `[data-cy=${movies[1].id}] img`, "top");
+        cy.get(`[data-cy=${movies[4].id}]`).find("img").should('be.verticallyAligned', 
+          `[data-cy=${movies[0].id}] img`, "left");
 
+        cy.wait(1000)
+        cy.percySnapshot();
+        cy.logout()
+    });
 
 });
 
