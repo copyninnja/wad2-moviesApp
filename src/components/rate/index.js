@@ -39,8 +39,8 @@ const Rank = ({movie,session_id}) => {
 
 return( 
     <span>
-    <Rate allowClear={true} tooltips={desc} onChange={handleChange} value={rank} />
-    {rank ? <span className="ant-rate-text">{desc[rank - 1]}</span> : ''}
+    <Rate allowClear={true} tooltips={desc} onChange={handleChange} value={rank} data-cy="ratetext" />
+    {rank ? <span className="ant-rate-text" >{desc[rank - 1]}</span> : ''}
   </span>
 );
 
