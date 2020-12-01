@@ -9,12 +9,13 @@ const TemplateMoviePage = ({ movie, children }) => {
         backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.backdrop_path})`,
         backgroundSize: '100%,100%',
     }
+
   }
 
   return (
     <>
- <div style={style.bgd}> 
-      <MovieHeader movie={movie} />
+<div style={style.bgd} > 
+      <MovieHeader movie={movie} />      
       <div className="row" >
         <div className="col-3">
           <img
