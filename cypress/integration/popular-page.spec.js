@@ -21,7 +21,7 @@ describe("popular", () => {
         it("should navigate to the login page due to private route", () => {
             cy.url().should("include",`/login`)
             cy.login()
-            cy.wait(1000)
+            cy.wait(2000)
             cy.get('a[href="/"]').eq(-1).contains("You've already loginin, Back to HomePage")
             cy.get('a[href="/"]').eq(-1).click().then(()=>{
               cy.url().should("include",`/`)
