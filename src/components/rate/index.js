@@ -7,7 +7,7 @@ const Rank = ({movie,session_id}) => {
     const [rank,setRank]=useState(0);
 
     const rankit=(it)=>{
-        if(it==0){
+        if(it===0){
         setRank(0);
         console.log("hello")
       // POST request using fetch inside useEffect React hook
