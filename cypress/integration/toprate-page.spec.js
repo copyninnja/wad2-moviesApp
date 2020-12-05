@@ -16,7 +16,9 @@ describe("top-Rate", () => {
 
   describe("private route", () => {
     beforeEach(() => {
-      cy.visit("/movies/TopRate");
+      cy.visit("/");
+      cy.get("nav").find("li").eq(4).find("a").click();
+      cy.wait(500);
     });
     it("should navigate to the login page due to private route", () => {
       cy.url().should("include", `/login`)

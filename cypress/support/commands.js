@@ -26,14 +26,20 @@ import 'cypress-layout-inspector/add-support';
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 Cypress.Commands.add('login', () => {
-    cy.visit("/login");
+    cy.visit("/");
+    cy.get("svg").eq(2).click();
+    cy.get('[data-cy="SignIn"]').click();
+    cy.reload();
     cy.get('input[name="email"]').click()
     cy.get('input[name="email"]').type("123@qq.com");
     cy.get('[data-cy="userpassword"]').type("123123");
     cy.get('button[data-cy="Sign In"]').click()
 })
 Cypress.Commands.add('logout', () => {
-    cy.visit("/login");
+    cy.visit("/");
+    cy.get("svg").eq(2).click();
+    cy.get('[data-cy="SignIn"]').click();
+    cy.reload();
     cy.wait(1000)
     cy.get("svg").eq(-1).click()
     cy.get('[data-cy="SignOut"]').click()

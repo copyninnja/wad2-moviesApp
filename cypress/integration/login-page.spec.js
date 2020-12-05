@@ -1,6 +1,9 @@
 describe("login", function () {
-    beforeEach(() => {
-        cy.visit("/login");
+    before(() => {
+        cy.visit("/");
+        cy.get("svg").eq(2).click();
+        cy.get('[data-cy="SignIn"]').click();
+        cy.reload();
         // cy.wait(1000)
         // if (cy.get('a[href="/"]').contains()) { 
         //     cy.get("svg").eq(-1).click()
@@ -15,6 +18,10 @@ describe("login", function () {
             .children().should('not.be.empty')
             .then(cy.wrap)
     }
+    afterEach(() => {
+        getFormBody().get('input[name="email"]').clear();
+        getFormBody().get('input[name="password"]').clear();
+    })
 
     it("invalid email", () => {
         // test exeption
@@ -36,13 +43,16 @@ describe("login", function () {
         getFormBody().get('input[name="email"]').click()
         getFormBody().get('input[name="email"]').type("1234@qq.com");
 
-        const stub = cy.stub()
-        cy.on('window:alert', stub)
+        Cypress.on('window:alert', cy.spy())
+
         getFormBody().get('button[data-cy="Sign In"]').click()
             .then(() => {
-                expect(stub.getCall(0)).to.be.calledWith('Wrong password.')
+                cy.on('window:alert', (str) => {
+                    expect(str).to.equal(`Wrong password.`)
+                })
             });
     });
+
     it("right login", () => {
         // test exeption
         getFormBody().get('input[name="email"]').click()
@@ -58,7 +68,7 @@ describe("login", function () {
         cy.get("svg").eq(-1).click()
         console.log("fine")
         cy.get('[data-cy="SignOut"]').click()
-
+        cy.reload()
 
     });
 
