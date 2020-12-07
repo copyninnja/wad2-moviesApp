@@ -36,10 +36,10 @@ describe("top-Rate", () => {
 
   describe("check toprate movies ", () => {
     beforeEach(() => {
-      cy.visit("/movies/TopRate");
-      cy.wait(1000)
+      cy.visit("/");
       cy.get("nav").find("li").eq(4).find("a").click();
-
+      cy.wait(2000);
+      cy.get("nav").find("li").eq(4).find("a").click();
     });
     it("check star hover hint", () => {
       cy.get(".ant-rate")

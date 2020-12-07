@@ -23,6 +23,7 @@ const HeaderUser = () => {
         };
         const handleSignOut = () => {
             context.signout();
+            setAnchorEl(null);
         };
 
         // return console.log(context.isAuthenticated === true);
@@ -48,9 +49,10 @@ const HeaderUser = () => {
                 }}
                 open={open}
                 onClose={handleClose}
+                
             >
             <Link to="/login">
-                <MenuItem  data-cy="SignIn">SignIn</MenuItem> </Link>             
+                <MenuItem  onClick={handleClose} data-cy="SignIn">SignIn</MenuItem> </Link>             
    {/* <MenuItem onClick={handleClose}>Register</MenuItem> */}
                         </Menu>
             </div>

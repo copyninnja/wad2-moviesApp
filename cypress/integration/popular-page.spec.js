@@ -19,7 +19,6 @@ describe("popular", () => {
     beforeEach(() => {
       cy.visit("/");
       cy.get("nav").find("li").eq(3).find("a").click();
-      cy.reload();
     });
     it("should navigate to the login page due to private route", () => {
       cy.url().should("include", `/login`)
@@ -39,7 +38,6 @@ describe("popular", () => {
     beforeEach(() => {
       cy.visit("/");
       cy.get("nav").find("li").eq(3).find("a").click();
-      cy.reload();
       cy.wait(1000)
       cy.get("nav").find("li").eq(3).find("a").click();
 
