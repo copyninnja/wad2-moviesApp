@@ -55,11 +55,13 @@ describe("top-Rate", () => {
     })
 
     it("check cards layout", () => {
+      cy.wait(500)
       cy.get(`img`).should('be.horizontallyAligned',
         ".slick-track", "top");
       cy.wait(1000)
       cy.percySnapshot();
     });
+
     it("check post function", () => {
       cy.window().then(win => {
         cy.spy(win, 'confirm').as('winConfirmSpy')
