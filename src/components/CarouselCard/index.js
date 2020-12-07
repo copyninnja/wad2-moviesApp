@@ -8,7 +8,7 @@ const CarouselCard = ({movie,session_id}) => {
 
     return (
 <div>
-      <h2>
+      <h2 id={movie.id}>
         <span>
         <Link to={`/movies/${movie.id}`}>
         <img
