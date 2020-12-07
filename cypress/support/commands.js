@@ -29,7 +29,6 @@ Cypress.Commands.add('login', () => {
     cy.visit("/");
     cy.get("svg").eq(2).click();
     cy.get('[data-cy="SignIn"]').click();
-    cy.reload();
     cy.get('input[name="email"]').click()
     cy.get('input[name="email"]').type("123@qq.com");
     cy.get('[data-cy="userpassword"]').type("123123");
@@ -39,7 +38,6 @@ Cypress.Commands.add('logout', () => {
     cy.visit("/");
     cy.get("svg").eq(2).click();
     cy.get('[data-cy="SignIn"]').click();
-    cy.reload();
     cy.wait(1000)
     cy.get("svg").eq(-1).click()
     cy.get('[data-cy="SignOut"]').click()
