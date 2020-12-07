@@ -40,7 +40,7 @@ describe("popular", () => {
       cy.get("nav").find("li").eq(3).find("a").click();
       cy.wait(1000)
       cy.get("nav").find("li").eq(3).find("a").click();
-
+      cy.wait(1000)
     });
     it("check cards layout", () => {
       //   cy.get(".card").each(($card, index) => {

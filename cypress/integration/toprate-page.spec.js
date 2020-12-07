@@ -18,7 +18,7 @@ describe("top-Rate", () => {
     beforeEach(() => {
       cy.visit("/");
       cy.get("nav").find("li").eq(4).find("a").click();
-      cy.wait(500);
+      cy.wait(1000);
     });
     it("should navigate to the login page due to private route", () => {
       cy.url().should("include", `/login`)
@@ -40,7 +40,9 @@ describe("top-Rate", () => {
       cy.get("nav").find("li").eq(4).find("a").click();
       cy.wait(2000);
       cy.get("nav").find("li").eq(4).find("a").click();
+      cy.wait(1000)
     });
+
     it("check star hover hint", () => {
       cy.get(".ant-rate")
         .eq(0)
@@ -51,6 +53,7 @@ describe("top-Rate", () => {
       cy.get(`.ant-tooltip-inner`).should("contain", "terrible")
 
     })
+
     it("check cards layout", () => {
       cy.get(`img`).should('be.horizontallyAligned',
         ".slick-track", "top");
@@ -61,6 +64,7 @@ describe("top-Rate", () => {
       cy.window().then(win => {
         cy.spy(win, 'confirm').as('winConfirmSpy')
     })
+
     Cypress.on('window:alert', cy.spy())
       cy.get(".ant-rate")
         .eq(0)
