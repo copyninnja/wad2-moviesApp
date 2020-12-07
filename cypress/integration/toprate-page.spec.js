@@ -53,10 +53,9 @@ describe("top-Rate", () => {
       cy.get(`.ant-tooltip-inner`).should("contain", "terrible")
 
     })
-
+    
     it("check cards layout", () => {
-      cy.wait(500)
-      cy.get(`img`).should('be.horizontallyAligned',
+      cy.get('[data-cy="761053"]').should('be.horizontallyAligned',
         ".slick-track", "top");
       cy.wait(1000)
       cy.percySnapshot();
@@ -65,22 +64,21 @@ describe("top-Rate", () => {
     it("check post function", () => {
       cy.window().then(win => {
         cy.spy(win, 'confirm').as('winConfirmSpy')
-    })
+      })
 
-    Cypress.on('window:alert', cy.spy())
+      Cypress.on('window:alert', cy.spy())
       cy.get(".ant-rate")
         .eq(0)
         .within(() => {
           cy.get("li").eq(0).click()
-          .then(() => {
-            cy.on('window:alert', (str) => {
-              expect(str).to.equal(`"The item/record was updated successfully."`)
+            .then(() => {
+              cy.on('window:alert', (str) => {
+                expect(str).to.equal(`"The item/record was updated successfully."`)
+              })
             })
-          })
         })
 
-        cy.logout()
-      
+      cy.logout()
 
     });
 

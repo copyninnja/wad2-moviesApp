@@ -12,6 +12,7 @@ const CarouselCard = ({movie,session_id}) => {
         <span>
         <Link to={`/movies/${movie.id}`}>
         <img
+          data-cy={movie.id}
           className="abc "
           alt={movie.title}
           src={
