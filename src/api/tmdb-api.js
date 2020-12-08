@@ -1,6 +1,6 @@
-export const getMovies = () => {
+export const getMovies = language => {
     return fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&page=1`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=${language}&include_adult=false&page=1`
     )
       .then(res => res.json())
       .then(json => json.results);
@@ -28,16 +28,16 @@ export const getMovies = () => {
       .then(res => res.json())
       .then(json => json.results);
   };
-  export const getUpcomingMovies= ()=>{
+  export const getUpcomingMovies= language =>{
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&page=1`
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=${language}&include_adult=false&page=1`
     )
       .then(res => res.json())
       .then(json => json.results);
   };
-  export const getPopularMovies= ()=>{
+  export const getPopularMovies= language=>{
     return fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&page=5&language=ja`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&page=5&language=${language}`
     )
       .then(res => res.json())
       .then(json => json.results);
@@ -86,5 +86,6 @@ export const getMovies = () => {
     .then(json => json.success);
     
   }
+
 
   
