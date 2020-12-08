@@ -13,6 +13,7 @@ import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
 import Karousel from "../src/components/Carousel";
 import Rank from "../src/components/rate";
+import RadioBox from "../src/components/radioBox";
 
 const sample = {
   adult: false,
@@ -173,3 +174,6 @@ storiesOf("Movie Details Page/MovieHeader", module)
 
   storiesOf("TopRate Page/rank", module)
   .add("default", () => <Rank />);
+
+  storiesOf("filter /radioBox", module)
+  .add("default", () => <RadioBox />);

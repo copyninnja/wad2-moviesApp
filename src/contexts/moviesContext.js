@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useReducer } from "react";
+import React, { useEffect, createContext, useReducer, useState } from "react";
 import { getMovies, getUpcomingMovies ,getPopularMovies, getTopRtedMovies} from "../api/tmdb-api";
 
 export const MoviesContext = createContext(null);
@@ -53,7 +53,10 @@ const reducer = (state, action) => {
 
 const MoviesContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, { movies: [], upcoming: [], popular: [],toprate:[]});
-
+  const [language,setLanguage]=useState("en");
+  const seLanguage=(props)=>{
+    setLanguage(props)
+  }
   const addToFavorites = (movieId) => {
     const index = state.movies.map((m) => m.id).indexOf(movieId);
     dispatch({ type: "add-favorite", payload: { movie: state.movies[index] } });
@@ -72,25 +75,25 @@ const MoviesContextProvider = (props) => {
   };
 
   useEffect(() => {
-    getMovies().then((movies) => {
+    getMovies(language).then((movies) => {
       dispatch({ type: "load", payload: { movies } });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, language);
 
   useEffect(() => {
-    getUpcomingMovies().then((movies) => {
+    getUpcomingMovies(language).then((movies) => {
       dispatch({ type: "load-upcoming", payload: { movies } });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, language);
 
   useEffect(() => {
-    getPopularMovies().then((movies) => {
+    getPopularMovies(language).then((movies) => {
       dispatch({ type: "load-popular", payload: { movies } });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, language);
 
   useEffect(() => {
     getTopRtedMovies().then((movies) => {
@@ -98,7 +101,6 @@ const MoviesContextProvider = (props) => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
 
  
@@ -110,6 +112,7 @@ const MoviesContextProvider = (props) => {
         upcoming: state.upcoming,
         popular: state.popular,
         toprate:state.toprate,
+        seLanguage: seLanguage,
         addToFavorites: addToFavorites,
         addReview: addReview,
         addToWatchList: addToWatchList,

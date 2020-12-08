@@ -25,7 +25,7 @@ const MovieListPageTemplate = ({ movies, title, action }) => {
   return (
     <>
       <Header title={title} numMovies={displayedMovies.length} />
-      <FilterControls onUserInput={handleChange} numMovies={displayedMovies.length}/>
+      <FilterControls onUserInput={handleChange} numMovies={displayedMovies.length} title={title}/>
       <MovieList
        action={action}
        movies={displayedMovies}
