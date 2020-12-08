@@ -155,7 +155,7 @@ storiesOf("Movie Details Page/MovieHeader", module)
   ))
   .add("default", () => <MovieHeader movie={sample} />);
 
-  storiesOf("Movie Details Page/carousel", module)
+  storiesOf("TopRate Page/carousel", module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -171,5 +171,5 @@ storiesOf("Movie Details Page/MovieHeader", module)
     )
   });
 
-  storiesOf("Movie Details Page/rank", module)
+  storiesOf("TopRate Page/rank", module)
   .add("default", () => <Rank />);

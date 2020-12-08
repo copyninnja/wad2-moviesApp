@@ -1,3 +1,5 @@
+const { ArrowLeftRounded } = require("@material-ui/icons");
+
 let movies;
 
 
@@ -16,7 +18,9 @@ describe("top-Rate", () => {
 
   describe("private route", () => {
     beforeEach(() => {
-      cy.visit("/movies/TopRate");
+      cy.visit("/");
+      cy.get("nav").find("li").eq(4).find("a").click();
+      cy.wait(1000);
     });
     it("should navigate to the login page due to private route", () => {
       cy.url().should("include", `/login`)
@@ -34,11 +38,16 @@ describe("top-Rate", () => {
 
   describe("check toprate movies ", () => {
     beforeEach(() => {
-      cy.visit("/movies/TopRate");
-      cy.wait(1000)
+      cy.visit("/");
       cy.get("nav").find("li").eq(4).find("a").click();
-
+      cy.wait(3000);
+      cy.get("nav").find("li").eq(4).find("a").click();
+      cy.wait(2000)
     });
+    after(()=>{
+      cy.logout()
+
+    })
     it("check star hover hint", () => {
       cy.get(".ant-rate")
         .eq(0)
@@ -49,33 +58,34 @@ describe("top-Rate", () => {
       cy.get(`.ant-tooltip-inner`).should("contain", "terrible")
 
     })
-    it("check cards layout", () => {
-      cy.get(`img`).should('be.horizontallyAligned',
-        ".slick-track", "top");
+    
+    it.skip("check cards layout", () => {
+      cy.wait(1000)
+      cy.get('[data-cy="761053"]').should('be.horizontallyAligned',
+        "#761053", "top");
       cy.wait(1000)
       cy.percySnapshot();
     });
+
     it("check post function", () => {
       cy.window().then(win => {
         cy.spy(win, 'confirm').as('winConfirmSpy')
-    })
-    Cypress.on('window:alert', cy.spy())
+      })
+      Cypress.on('window:alert', cy.spy())
       cy.get(".ant-rate")
         .eq(0)
         .within(() => {
           cy.get("li").eq(0).click()
-          .then(() => {
-            cy.on('window:alert', (str) => {
-              expect(str).to.equal(`"The item/record was updated successfully."`)
+            .then(() => {
+              cy.on('window:alert', (str) => {
+                expect(str).to.equal(`"The item/record was updated successfully."`)
+              })
             })
-          })
         })
 
-        cy.logout()
-      
 
     });
-
+    
   });
 
 });
