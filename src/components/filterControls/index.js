@@ -30,6 +30,7 @@ const FilterControls = props => {
             type="text"
             placeholder="Title Search"
             onChange={handleTextChange}
+            data-cy="title_search"
           />
           <span>Genre:</span>
           {/* <select id="genre" onChange={handleGenreChange}>
@@ -47,6 +48,7 @@ const FilterControls = props => {
         placeholder="Please select"
         onChange={handleGenreChange}
         style={{ width: '20%' }}
+        data-cy="genre_select"
       >
          {context.genres.map(genre => {
               return (
@@ -57,7 +59,7 @@ const FilterControls = props => {
             })}
       </Select>
           <span>Language:</span>
-          <RadioBox/>
+          <RadioBox />
           
 
         </h4>
