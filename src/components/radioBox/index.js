@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,useContext} from "react";
+import React, {useContext} from "react";
 import 'antd/dist/antd.css';
 import './index.css';
 import { Radio } from 'antd';

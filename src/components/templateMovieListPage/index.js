@@ -12,7 +12,7 @@ const MovieListPageTemplate = ({ movies, title, action }) => {
     if (mom.length < son.length) return false;
     var aStr = mom.toString();
     for (var i = 0, len = son.length; i < len; i++) {
-      if (aStr.indexOf(son[i]) == -1) return false;
+      if (aStr.indexOf(son[i]) === -1) return false;
     }
     return true;
   }
