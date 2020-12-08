@@ -2,18 +2,23 @@ import React, { useContext } from "react";
 import "./filterControls.css";
 import { GenresContext } from '../../contexts/genresContext' 
 import RadioBox from "../radioBox";
+import { Select} from 'antd';
+import { Option } from 'rc-select';
+
+
 const FilterControls = props => {
   const context = useContext(GenresContext);
 
   const handleChange = (e, type, value) => {
-    e.preventDefault();
+    // e.preventDefault();
     props.onUserInput(type, value);
   };
   const handleTextChange = e => {
     handleChange(e, "name", e.target.value);
   };
   const handleGenreChange = e => {
-    handleChange(e, "genre", e.target.value);
+    console.log(e)
+    handleChange(e, "genre", e);
   };
 
   return (
@@ -27,7 +32,7 @@ const FilterControls = props => {
             onChange={handleTextChange}
           />
           <span>Genre:</span>
-          <select id="genre" onChange={handleGenreChange}>
+          {/* <select id="genre" onChange={handleGenreChange}>
             {context.genres.map(genre => {
               return (
                 <option key={genre.id} value={genre.id}>
@@ -35,7 +40,22 @@ const FilterControls = props => {
                 </option>
               );
             })}
-          </select>
+          </select> */}
+          <Select
+        id="genre"
+        mode="multiple"
+        placeholder="Please select"
+        onChange={handleGenreChange}
+        style={{ width: '20%' }}
+      >
+         {context.genres.map(genre => {
+              return (
+                <Option key={genre.id} value={genre.id}>
+                  {genre.name}
+                </Option>
+              );
+            })}
+      </Select>
           <span>Language:</span>
           <RadioBox/>
           
