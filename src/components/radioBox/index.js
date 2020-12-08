@@ -1,7 +1,7 @@
 import React, { useEffect, useState ,useContext} from "react";
 import 'antd/dist/antd.css';
 import './index.css';
-import { Select, Radio } from 'antd';
+import { Radio } from 'antd';
 import {MoviesContext} from "../../contexts/moviesContext";
 
 const RadioBox = (page) => {
@@ -15,7 +15,7 @@ const RadioBox = (page) => {
 
   return (
     <>
-      <Radio.Group  onChange={handleChange}>
+      <Radio.Group defaultValue="en" onChange={handleChange}>
         <Radio.Button value="en">English</Radio.Button>
         <Radio.Button value="ja">Japanese</Radio.Button>
         <Radio.Button value="zh">Chinese</Radio.Button>

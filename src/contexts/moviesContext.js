@@ -79,21 +79,21 @@ const MoviesContextProvider = (props) => {
       dispatch({ type: "load", payload: { movies } });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, language);
+  }, [language]);
 
   useEffect(() => {
     getUpcomingMovies(language).then((movies) => {
       dispatch({ type: "load-upcoming", payload: { movies } });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, language);
+  }, [language]);
 
   useEffect(() => {
     getPopularMovies(language).then((movies) => {
       dispatch({ type: "load-popular", payload: { movies } });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, language);
+  }, [language]);
 
   useEffect(() => {
     getTopRtedMovies().then((movies) => {
