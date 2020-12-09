@@ -60,43 +60,78 @@ describe("Home Page ", () => {
                 const matchingMovies = filterByTitle(movies, searchString);
                 cy.get(`[data-cy="title_search"]`).clear().type(searchString);
                 cy.get(".movies").children().should("have.length", 0);
-           
+
             })
-        }) 
+        })
     })
-        describe("By movie genre", () => {
-            it("should display movies with the specified genre only", () => {
-              const selectedGenreId = 35;
-              const selectedGenreText = "Comedy";
-              const matchingMovies = filterByGenre(movies, selectedGenreId);
-              cy.get(`[data-cy="genre_select"]`).click();
-              cy.get(`[title=${selectedGenreText}]`).click();
-              cy.get(".card").should("have.length", matchingMovies.length);
-              cy.get(".card").each(($card, index) => {
+    describe("By movie genre", () => {
+        it("should display movies with the specified genre only", () => {
+            const selectedGenreId = 35;
+            const selectedGenreText = "Comedy";
+            const matchingMovies = filterByGenre(movies, selectedGenreId);
+            cy.get(`[data-cy="genre_select"]`).click();
+            cy.get(`[title=${selectedGenreText}]`).click();
+            cy.get(".card").should("have.length", matchingMovies.length);
+            cy.get(".card").each(($card, index) => {
                 cy.wrap($card)
-                  .find(".card-title")
-                  .should("have.text", matchingMovies[index].title);
-              });      
-            });
-            it("should display movies with the specified genre and title", () => {
-                const searchString = "p";
-                const selectedGenreId = 35;
-                const selectedGenreText = "Comedy";
-                const matchingMovies = filterByTitle( filterByGenre(movies, selectedGenreId),searchString);
-                console.log(matchingMovies);
-                cy.get(`[data-cy="genre_select"]`).click();
-                cy.get(`[title=${selectedGenreText}]`).click();
-                cy.get(`[data-cy="title_search"]`).clear().type(searchString);
-                cy.get(".card").should("have.length", matchingMovies.length);
-                cy.get(".card").each(($card, index) => {
-                  cy.wrap($card)
                     .find(".card-title")
                     .should("have.text", matchingMovies[index].title);
-                }); 
-                cy.wait(1000)
-            cy.percySnapshot();     
-              });
+            });
+        });
+        it("should display movies with the specified genre and title", () => {
+            const searchString = "p";
+            const selectedGenreId = 35;
+            const selectedGenreText = "Comedy";
+            const matchingMovies = filterByTitle(filterByGenre(movies, selectedGenreId), searchString);
+            console.log(matchingMovies);
+            cy.get(`[data-cy="genre_select"]`).click();
+            cy.get(`[title=${selectedGenreText}]`).click();
+            cy.get(`[data-cy="title_search"]`).clear().type(searchString);
+            cy.get(".card").should("have.length", matchingMovies.length);
+            cy.get(".card").each(($card, index) => {
+                cy.wrap($card)
+                    .find(".card-title")
+                    .should("have.text", matchingMovies[index].title);
+            });
+            cy.wait(1000)
+            cy.percySnapshot();
+        });
+    });
+    describe("By movie language", () => {
+        it("should display movies with english by default", () => {
+            const selectedMovieId = 577922;
+            const selectedMovieText = "Tenet";
+            cy.get(`[data-cy="english"]`).click({
+                force: true
+            });
+            cy.get(`[data-cy="${selectedMovieId}"]`).within(() => {
+                cy.get("h4").should("contain", selectedMovieText)
+            })
 
         });
-      
-      });
+        it("should display movies with japanese language", () => {
+            const selectedMovieId = 577922;
+            const selectedMovieText = "TENET テネット";
+            cy.get(`[data-cy="japanese"]`).click({
+                force: true
+            });
+            cy.get(`[data-cy="${selectedMovieId}"]`).within(() => {
+                cy.get("h4").should("contain", selectedMovieText)
+            })
+
+        });
+        it("should display movies with chinese language", () => {
+            const selectedMovieId = 577922;
+            const selectedMovieText = "信条";
+            cy.get(`[data-cy="chinese"]`).click({
+                force: true
+            });
+            cy.get(`[data-cy="${selectedMovieId}"]`).within(() => {
+                cy.get("h4").should("contain", selectedMovieText)
+            }) 
+            cy.wait(1000)
+        cy.percySnapshot();
+        });
+       
+    });
+});

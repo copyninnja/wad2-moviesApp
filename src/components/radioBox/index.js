@@ -15,10 +15,10 @@ const RadioBox = (page) => {
 
   return (
     <>
-      <Radio.Group defaultValue="en" onChange={handleChange}>
-        <Radio.Button value="en">English</Radio.Button>
-        <Radio.Button value="ja">Japanese</Radio.Button>
-        <Radio.Button value="zh">Chinese</Radio.Button>
+      <Radio.Group data-cy="radioGroup" defaultValue="en" onChange={handleChange} >
+        <Radio.Button data-cy="english" value="en">English</Radio.Button>
+        <Radio.Button data-cy="japanese" value="ja">Japanese</Radio.Button>
+        <Radio.Button data-cy="chinese" value="zh">Chinese</Radio.Button>
       </Radio.Group>
     </>
   );
