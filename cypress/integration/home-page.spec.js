@@ -4,8 +4,22 @@ let movies; // List of movies from TMDB
 const filterByTitle = (movieList, string) =>
     movieList.filter((m) => m.title.toLowerCase().search(string) !== -1);
 
-const filterByGenre = (movieList, genreId) =>
-    movieList.filter((m) => m.genre_ids.includes(genreId));
+   const isContained = (mom, son) => {
+        if (mom.length < son.length) return false;
+        var aStr = mom.toString();
+        for (var i = 0, len = son.length; i < len; i++) {
+          if (aStr.indexOf(son[i]) === -1) return false;
+        }
+        return true;
+      }
+
+      const filterByGenre = (movieList, genreId) =>
+      movieList.filter((m) =>{
+        return  genreId > 0||genreId.length>1
+        ? isContained(m.genre_ids,genreId)
+        : true;
+    });
+ 
 
 describe("Home Page ", () => {
     before(() => {
@@ -66,9 +80,10 @@ describe("Home Page ", () => {
     })
     describe("By movie genre", () => {
         it("should display movies with the specified genre only", () => {
-            const selectedGenreId = 35;
+            const selectedGenreId = [35];
             const selectedGenreText = "Comedy";
             const matchingMovies = filterByGenre(movies, selectedGenreId);
+            cy.wait(500)
             cy.get(`[data-cy="genre_select"]`).click();
             cy.get(`[title=${selectedGenreText}]`).click();
             cy.get(".card").should("have.length", matchingMovies.length);
@@ -80,7 +95,7 @@ describe("Home Page ", () => {
         });
         it("should display movies with the specified genre and title", () => {
             const searchString = "p";
-            const selectedGenreId = 35;
+            const selectedGenreId = [35];
             const selectedGenreText = "Comedy";
             const matchingMovies = filterByTitle(filterByGenre(movies, selectedGenreId), searchString);
             console.log(matchingMovies);
@@ -95,6 +110,22 @@ describe("Home Page ", () => {
             });
             cy.wait(1000)
             cy.percySnapshot();
+        });
+        //test excep
+        it("should display movies with a number of genres", () => {
+            const selectedGenreId = [28,12,35];
+            const selectedGenreText = ["Action","Adventure","Comedy"];
+            const matchingMovies = filterByGenre(movies, selectedGenreId);
+            console.log(matchingMovies)
+            cy.get(`[data-cy="genre_select"]`).click();
+            cy.get(`[title=${selectedGenreText[0]}]`).click();
+            cy.get(`[title=${selectedGenreText[1]}]`).click();
+            cy.get(`[title=${selectedGenreText[2]}]`).click();
+
+            cy.get(".card").should("have.length", matchingMovies.length);
+            cy.get(".movies").children().should("have.length", 0);
+
+
         });
     });
     describe("By movie language", () => {
@@ -128,10 +159,10 @@ describe("Home Page ", () => {
             });
             cy.get(`[data-cy="${selectedMovieId}"]`).within(() => {
                 cy.get("h4").should("contain", selectedMovieText)
-            }) 
+            })
             cy.wait(1000)
-        cy.percySnapshot();
+            cy.percySnapshot();
         });
-       
+
     });
 });
