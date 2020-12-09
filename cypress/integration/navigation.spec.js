@@ -97,6 +97,7 @@ describe("Navigation", () => {
         });
         it("should navigate from home page to movie details and back", () => {
             cy.get(".card").eq(1).find("img").click();
+            cy.wait(500);
             cy.get("svg[data-icon=arrow-circle-left]").click();
             cy.url().should("not.include", `/movies`);
             cy.get("h2").contains("No. Movies");
@@ -106,6 +107,7 @@ describe("Navigation", () => {
             cy.get(".card").eq(0).find("button").click();
             cy.get("nav").find("li").eq(2).find("a").click();
             cy.get(".card").eq(0).find("img").click();
+            cy.wait(500);
             cy.get("svg[data-icon=arrow-circle-left]").click();
             cy.url().should("not.include", `${movies[0].id}`);
             cy.get("h2").contains("Favorite Movies");
