@@ -29,11 +29,12 @@
     "storybook": "start-storybook -s ./public -p 6006 -c ./.storybook",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "percy exec -- cypress run",
+    "test": "nyc percy exec -- cypress run",
     "eject": "react-scripts eject",
-    "test:e2e": "cypress run",
-    "cypress": "cypress",
-    "start:ci": "start-server-and-test 'http-server ./build  -p 3000' 3000 'cypress run --browser chrome '"
+    "test:e2e": "nyc cypress run",
+    "cypress": "nyc cypress",
+    "start:ci": "start-server-and-test 'http-server ./build  -p 3000' 3000 'cypress run --browser chrome '",
+    "cover": "nyc npm run test:e2e"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,12 +46,18 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@cypress/code-coverage": "^3.8.6",
     "@percy/cypress": "^2.3.2",
     "@storybook/addon-actions": "^5.3.1",
     "@storybook/react": "^5.3.1",
     "babel-loader": "^8.0.6",
+    "babel-plugin-istanbul": "^6.0.0",
     "cypress": "^5.5.0",
     "cypress-layout-inspector": "^1.3.1",
     "start-server-and-test": "^1.10.6"
+  },
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false
   }
 }
