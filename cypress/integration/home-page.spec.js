@@ -1,10 +1,10 @@
 let movies; // List of movies from TMDB
 
 // Utility functions
-const filterByTitle =window.__coverage__ = (movieList, string) =>
+const filterByTitle = (movieList, string) =>
     movieList.filter((m) => m.title.toLowerCase().search(string) !== -1);
 
-   const isContained = window.__coverage__ =(mom, son) => {
+   const isContained = (mom, son) => {
         if (mom.length < son.length) return false;
         var aStr = mom.toString();
         for (var i = 0, len = son.length; i < len; i++) {
@@ -13,7 +13,7 @@ const filterByTitle =window.__coverage__ = (movieList, string) =>
         return true;
       }
 
-      const filterByGenre =window.__coverage__ = (movieList, genreId) =>
+      const filterByGenre = (movieList, genreId) =>
       movieList.filter((m) =>{
         return  genreId > 0||genreId.length>1
         ? isContained(m.genre_ids,genreId)

@@ -1,6 +1,5 @@
 import '@percy/cypress';
 import 'cypress-layout-inspector/add-support';
-import '@cypress/code-coverage/support';
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
